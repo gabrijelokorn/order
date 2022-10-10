@@ -17,6 +17,19 @@ const app = express();
 app.use(cors());
 
 
+// ------------ SESSION AND COOKIES ------------ //
+app.use(session({
+    secret: "rolling-communication",
+    rolling: true,
+    cookie: {
+        maxAge: 1000 * 60
+    },
+    // resave: false, <- Forces the session to be saved back to the session store, even if the session was never modified during the request.
+    // saveUninitialized: true, <- Forces a session that is "uninitialized" to be saved to the store. A session is uninitialized when it is new but not modified.
+}));
+// ------------ ------------------- ------------ //
+
+
 // ------------ MIDDLEWARE ------------ //
 app.use(express.static('public/dist/order'));
 app.use("/api", api);

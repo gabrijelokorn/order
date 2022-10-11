@@ -33,6 +33,10 @@ app.use(session({
 // ------------ MIDDLEWARE ------------ //
 app.use(express.static('public/dist/order'));
 app.use("/api", api);
+app.get("/test", (req, res) => {
+    console.log(req.session);
+    res.end();
+});
 app.use((req, res) => {
     res.sendFile(path.join(`${__dirname}/public/dist/order/index.html`))
 });

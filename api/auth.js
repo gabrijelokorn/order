@@ -10,8 +10,10 @@ auth.post("/login", (req, res) => {
     res.end();
 });
 
+
 auth.get("/logout", (req, res) => {
-    res.send("logged out");
+    req.session.uid = 0;
+    res.redirect('/test');
 });
 
 

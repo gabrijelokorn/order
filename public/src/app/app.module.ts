@@ -13,6 +13,7 @@ import { LobbyComponent } from './lobby/lobby.component';
 import { LoginComponent } from './lobby/login/login.component';
 import { RegisterComponent } from './lobby/register/register.component';
 import { FormsModule } from '@angular/forms';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { FormsModule } from '@angular/forms';
     MatIconModule,
     MatInputModule,
     MatButtonModule,
+    HttpClientModule
   ],
   providers: [
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } }

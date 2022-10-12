@@ -5,6 +5,7 @@ const session = require("express-session");
 const path = require("path");
 
 const api = require("./api/api");
+const bodyParser = require("body-parser");
 // ------------ ------------ ------------ //
 
 
@@ -14,23 +15,28 @@ const PORT = 5000;
 
 
 const app = express();
-app.use(cors());
-
 
 // ------------ SESSION AND COOKIES ------------ //
 app.use(session({
     secret: "rolling-communication",
     rolling: true,
     cookie: {
-        maxAge: 1000 * 60
+        maxAge: 1000 * 60,
     },
     // resave: false, <- Forces the session to be saved back to the session store, even if the session was never modified during the request.
     // saveUninitialized: true, <- Forces a session that is "uninitialized" to be saved to the store. A session is uninitialized when it is new but not modified.
 }));
 // ------------ ------------------- ------------ //
 
+app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // ------------ MIDDLEWARE ------------ //
+app.get("/", (req, res, next) => {
+    console.log("Expires:", req.session.cookie.maxAge / 1000);
+    next();
+});
 app.use(express.static('public/dist/order'));
 app.use("/api", api);
 app.get("/test", (req, res) => {

@@ -1,0 +1,11 @@
+<p>login works!</p>
+<form #loginForm="ngForm" (submit)="loginFun(loginForm.value)">
+        <mat-form-field>
+            <input matInput name="email" type="text" ngModel>
+        </mat-form-field>
+        &nbsp;
+        <mat-form-field>
+            <input matInput name="password" type="text" ngModel/>
+        </mat-form-field>
+    <button type="submit" mat-flat-button color="primary">Login</button>
+</form>

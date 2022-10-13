@@ -4,7 +4,12 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthenticationService {
+export class UserService {
+  
+  user = {
+    userName: new String,
+    
+  }
 
   constructor(private httpClient: HttpClient) { }
 
@@ -13,5 +18,13 @@ export class AuthenticationService {
     httpHeaders.append('content-type', 'application/json');
 
     return this.httpClient.post('http://192.168.13.128:5000/api/auth/login', userdata, { headers: httpHeaders });
+  }
+
+  set_userName (newName: String) {
+    this.user.userName = newName;
+  }
+
+  get_userName () {
+    return this.user.userName;
   }
 }

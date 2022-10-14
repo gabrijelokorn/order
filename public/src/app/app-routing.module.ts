@@ -1,3 +1,5 @@
+import { ProfileComponent } from './profile/profile.component';
+import { AdministrationComponent } from './administration/administration.component';
 import { RegisterComponent } from './lobby/register/register.component';
 import { LoginComponent } from './lobby/login/login.component';
 import { LobbyComponent } from './lobby/lobby.component';
@@ -12,6 +14,8 @@ const routes: Routes = [
         { path: 'register', component: RegisterComponent }
       ]
   },
+  { path: 'administration', component: AdministrationComponent },
+  { path: 'profile', component: ProfileComponent }
 ];
 
 @NgModule({

@@ -33,14 +33,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // ------------ MIDDLEWARE ------------ //
-app.get("/", (req, res, next) => {
-    console.log("Expires:", req.session.cookie.maxAge / 1000);
+app.get("/*", (req, res, next) => {
+    console.log(req.session.id, ":", req.session);
+
     next();
 });
 app.use(express.static('public/dist/order'));
 app.use("/api", api);
 app.get("/test", (req, res) => {
-    console.log(req.session);
+    // console.log(req.session);
     res.end();
 });
 app.use((req, res) => {

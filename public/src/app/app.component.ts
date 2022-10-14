@@ -14,6 +14,7 @@ export class AppComponent {
   
   ngOnInit(): void {
     // this.uname = this.userService.user.userName;
+    
   }
   
 }

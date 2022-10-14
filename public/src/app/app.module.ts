@@ -14,13 +14,17 @@ import { LoginComponent } from './lobby/login/login.component';
 import { RegisterComponent } from './lobby/register/register.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { AdministrationComponent } from './administration/administration.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LobbyComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    AdministrationComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,

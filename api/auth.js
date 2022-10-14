@@ -4,38 +4,41 @@ const pool = require("./mysqlLib");
 const auth = express();
 
 auth.get("/register", (req, res) => {
-    console.log(req.session);
     res.end();
 });
 
 auth.post("/login", (req, res, next) => {
-    const clientReq = req.body;
+    const clentLoginRequestBody = req.body;
     const loginQuery = 'SELECT uid as UID, userName as UN, password as PWD from Users where email = ?';
-    pool.query(loginQuery, clientReq.email, (err, rows) => {
+    pool.query(loginQuery, clentLoginRequestBody.email, (err, rows) => {
         if (err) {
-            console.log("Database error:", err);
+            console.log("In /login, Database error:", err);
+            res.sendStatus(500);
         } else {
             if (rows.length == 1) {
-                if (clientReq.password == rows[0].PWD) {
+                if (clentLoginRequestBody.password == rows[0].PWD) {
                     req.session.uid = rows[0].UID;
-                    console.log(rows[0].UN, "logged in.");
-                    res.json(
-                        {
-                            "uid": rows[0].UID,
-                            "userName": rows[0].UN,
-                        }
-                    );
+                    console.log("In /login,", rows[0].UN, "logged in.");
+                    // res.json(
+                    //     {
+                    //         "uid": rows[0].UID,
+                    //         "userName": rows[0].UN,
+                    //     }
+                    // );
+                    console.log(req.session);
+                    res.sendStatus(200);
                 } else {
-                    console.log("Incorrect password");
+                    console.log("In /login, Incorrect password");
                     res.json({ "loginMssg": "Incorrect Password" });
                 }
             } else if (rows.length == 0) {
-                console.log("Found 0 matches for", clientReq.email);
+                console.log("In /login, Found 0 matches for", clentLoginRequestBody.email);
                 res.json({ "loginMssg": "Mail does not exist" });
             } else {
-                console.log("Dababase error: Found", rows.length, "matches for one email!");
+                console.log("In /login, Dababase error: Found", rows.length, "matches for one email!");
                 res.sendStatus(500);
             }
+            res.end();
         }
     });
 });

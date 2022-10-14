@@ -12,7 +12,9 @@ users.get("/listUsers", (req, res) => {
         } else {
             console.log("In /listUsers,", rows);
             res.json(rows);
+            res.end();
         }
+        res.end();
     });
 });
 
@@ -27,7 +29,9 @@ users.get("/profile", (req, res) => {
         } else {
             console.log("In /profile,", rows);
             res.json(rows);
+            res.end();
         }
+        res.end();
         
     });
 })

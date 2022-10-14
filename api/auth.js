@@ -19,14 +19,14 @@ auth.post("/login", (req, res, next) => {
                 if (clentLoginRequestBody.password == rows[0].PWD) {
                     req.session.uid = rows[0].UID;
                     console.log("In /login,", rows[0].UN, "logged in.");
-                    // res.json(
-                    //     {
-                    //         "uid": rows[0].UID,
-                    //         "userName": rows[0].UN,
-                    //     }
-                    // );
-                    console.log(req.session);
-                    res.sendStatus(200);
+                    res.json(
+                        {
+                            "uid": rows[0].UID,
+                            "userName": rows[0].UN,
+                        }
+                    );
+                    console.log(req.session.id, ":", req.session);
+                    res.end();
                 } else {
                     console.log("In /login, Incorrect password");
                     res.json({ "loginMssg": "Incorrect Password" });
@@ -40,6 +40,7 @@ auth.post("/login", (req, res, next) => {
             }
             res.end();
         }
+        res.end();
     });
 });
 

@@ -3,7 +3,7 @@ const express = require("express");
 const users = require("./users");
 const auth = require("./auth");
 
-const api = express();
+const api = express.Router();
 
 
 api.use("/users", users);

@@ -1,7 +1,7 @@
 const express = require("express");
 const pool = require("./mysqlLib");
 
-const auth = express();
+const auth = express.Router();
 
 auth.get("/register", (req, res) => {
     res.end();
@@ -45,7 +45,7 @@ auth.post("/login", (req, res, next) => {
 });
 
 
-auth.get("/logout", (req, res, next) => {
+auth.get("/logout", (req, res) => {
     console.log("Logging out and destroying cookie!");
     req.session.destroy();
     res.redirect("/lobby/login");

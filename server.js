@@ -19,23 +19,22 @@ const app = express();
 // ------------ SESSION AND COOKIES ------------ //
 app.use(session({
     secret: "rolling-communication",
-    rolling: true,
+    // rolling: true,
     cookie: {
-        maxAge: 1000 * 60,
+        maxAge: 1000 * 60 * 60,
     },
-    // resave: false, <- Forces the session to be saved back to the session store, even if the session was never modified during the request.
-    // saveUninitialized: true, <- Forces a session that is "uninitialized" to be saved to the store. A session is uninitialized when it is new but not modified.
+    // resave: false, // <- Forces the session to be saved back to the session store, even if the session was never modified during the request.
+    // saveUninitialized: true, // <- Forces a session that is "uninitialized" to be saved to the store. A session is uninitialized when it is new but not modified.
 }));
 // ------------ ------------------- ------------ //
 
+app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(cors());
 
 // ------------ MIDDLEWARE ------------ //
 app.get("/*", (req, res, next) => {
     console.log(req.session.id, ":", req.session);
-
     next();
 });
 app.use(express.static('public/dist/order'));

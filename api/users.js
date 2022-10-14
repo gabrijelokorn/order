@@ -1,6 +1,6 @@
 const express = require("express");
 const pool = require("./mysqlLib");
-const users = express();
+const users = express.Router();
 
 users.get("/listUsers", (req, res) => {
 
@@ -10,9 +10,9 @@ users.get("/listUsers", (req, res) => {
             console.log("In /listUsers, Database error:", err);
             res.sendStatus(500);
         } else {
-            console.log("In /listUsers,", rows);
+            // console.log("In   /listUsers,", rows);
+            console.log(req.session);
             res.json(rows);
-            res.end();
         }
         res.end();
     });
@@ -27,12 +27,9 @@ users.get("/profile", (req, res) => {
             console.log("In /profile, Database error:", err);
             res.sendStatus(500);
         } else {
-            console.log("In /profile,", rows);
+            // console.log("In /profile,", rows);
             res.json(rows);
-            res.end();
         }
-        res.end();
-        
     });
 })
 

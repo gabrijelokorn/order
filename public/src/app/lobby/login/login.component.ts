@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { UserService } from '../../user.service';
+import { DatePipe, formatDate } from '@angular/common';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -7,7 +8,7 @@ import { UserService } from '../../user.service';
 })
 export class LoginComponent implements OnInit {
 
-  newUser: any;
+  logged_user: any;
   constructor(public userService: UserService) {
   }
 
@@ -16,9 +17,10 @@ export class LoginComponent implements OnInit {
 
   login_request_function(userdata = { email: String, password: String }) {
     this.userService.login_request_service(userdata).subscribe(user => {
-      this.newUser = user;
-      this.userService.user.userName = this.newUser.u_un;
-      
+      this.logged_user = user;
+      this.userService.user.userName = this.logged_user.u_un;
+      console.log(user);
+
     });
   }
 }

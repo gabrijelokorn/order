@@ -14,20 +14,29 @@ auth.post("/login", (req, res, next) => {
         if (err) {
             console.log("Database error (in /api/auth.js/login):", err);
             res.json({ "error": err });
-        } else if (login_request_client_body.password == rows[0].u_pwd) {
-            req.session.uid = rows[0].u_uid;
-            res.json(
-                {
-                    "u_uid": rows[0].u_uid,
-                    "u_un": rows[0].u_un,
+        } else if (rows.length > 0) {
+            if (login_request_client_body.password == rows[0].u_pwd) {
+                req.session.uid = rows[0].u_uid;
+                res.json(
+                    {
+                        "u_un": rows[0].u_un,
+                    });
+                const record_login_sql_query = `INSERT INTO Statistics (uid, loginDate) VALUES ('${rows[0].u_uid}', sysdate()) `;
+                pool.query(record_login_sql_query, (err) => {
+                    if (err) {
+                        console.log("Database error (in /api/auth.js/recordLogin):", err);
+                    }
                 });
+            }
         } else {
             res.json(
                 {
-                    "error": "Wrong password"
+                    "error": "Login failed"
                 });
         }
     });
+
+
 });
 
 

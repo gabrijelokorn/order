@@ -6,27 +6,22 @@ import { Injectable } from '@angular/core';
 })
 export class UserService {
 
+  httpHeaders = new HttpHeaders().append('content-type', 'application/json');
   user = {
     userName: new String,
   }
-  constructor(private httpClient: HttpClient) { }
-
+  constructor(private httpClient: HttpClient) { 
+  }
+  
   login_request_service(userdata = { email: String, password: String }) {
-    const httpHeaders = new HttpHeaders();
-    httpHeaders.append('content-type', 'application/json');
-
-    return this.httpClient.post('http://192.168.13.128:5000/api/auth/login', userdata, { headers: httpHeaders });
+    return this.httpClient.post('http://192.168.13.128:5000/api/auth/login', userdata, { headers: this.httpHeaders });
   }
 
   listUsers_request_service() {
-    const httpHeaders = new HttpHeaders();
-    httpHeaders.append('content-type', 'application/json');
-    return this.httpClient.get(`http://192.168.13.128:5000/api/users/listUsers`, { headers: httpHeaders })
+    return this.httpClient.get(`http://192.168.13.128:5000/api/users/listUsers`, { headers: this.httpHeaders })
   }
 
   getUser_request_service(userName: String) {
-    const httpHeaders = new HttpHeaders();
-    httpHeaders.append('content-type', 'application/json');
-    return this.httpClient.get(`http://192.168.13.128:5000/api/users/profile?un=${userName}`, { headers: httpHeaders })
+    return this.httpClient.get(`http://192.168.13.128:5000/api/users/profile?un=${userName}`, { headers: this.httpHeaders })
   }
 }

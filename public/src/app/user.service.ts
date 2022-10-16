@@ -11,30 +11,22 @@ export class UserService {
   }
   constructor(private httpClient: HttpClient) { }
 
-  loginRequest(userdata = { email: String, password: String }) {
+  login_request_service(userdata = { email: String, password: String }) {
     const httpHeaders = new HttpHeaders();
     httpHeaders.append('content-type', 'application/json');
 
     return this.httpClient.post('http://192.168.13.128:5000/api/auth/login', userdata, { headers: httpHeaders });
   }
 
-  set_userName(newName: String) {
-    this.user.userName = newName;
-  }
-
-  get_userName() {
-    return this.user.userName;
-  }
-
-  listUsersRequest() {
+  listUsers_request_service() {
     const httpHeaders = new HttpHeaders();
     httpHeaders.append('content-type', 'application/json');
     return this.httpClient.get(`http://192.168.13.128:5000/api/users/listUsers`, { headers: httpHeaders })
   }
 
-  getUserRequest(userName: String) {
+  getUser_request_service(userName: String) {
     const httpHeaders = new HttpHeaders();
     httpHeaders.append('content-type', 'application/json');
-    return this.httpClient.get(`http://192.168.13.128:5000/api/users/profile?userName=${userName}`, { headers: httpHeaders })
+    return this.httpClient.get(`http://192.168.13.128:5000/api/users/profile?un=${userName}`, { headers: httpHeaders })
   }
 }

@@ -8,45 +8,30 @@ auth.get("/register", (req, res) => {
 });
 
 auth.post("/login", (req, res, next) => {
-    const clentLoginRequestBody = req.body;
-    const loginQuery = 'SELECT uid as UID, userName as UN, password as PWD from Users where email = ?';
-    pool.query(loginQuery, clentLoginRequestBody.email, (err, rows) => {
+    const login_request_client_body = req.body;
+    const login_request_sql_query = 'SELECT uid as u_uid, userName as u_un, password as u_pwd from Users where email = ?';
+    pool.query(login_request_sql_query, login_request_client_body.email, (err, rows) => {
         if (err) {
-            console.log("In /login, Database error:", err);
-            res.sendStatus(500);
+            console.log("Database error (in /api/auth.js/login):", err);
+            res.json({ "error": err });
+        } else if (login_request_client_body.password == rows[0].u_pwd) {
+            req.session.uid = rows[0].u_uid;
+            res.json(
+                {
+                    "u_uid": rows[0].u_uid,
+                    "u_un": rows[0].u_un,
+                });
         } else {
-            if (rows.length == 1) {
-                if (clentLoginRequestBody.password == rows[0].PWD) {
-                    req.session.uid = rows[0].UID;
-                    console.log("In /login,", rows[0].UN, "logged in.");
-                    res.json(
-                        {
-                            "uid": rows[0].UID,
-                            "userName": rows[0].UN,
-                        }
-                    );
-                    console.log(req.session.id, ":", req.session);
-                    res.end();
-                } else {
-                    console.log("In /login, Incorrect password");
-                    res.json({ "loginMssg": "Incorrect Password" });
-                }
-            } else if (rows.length == 0) {
-                console.log("In /login, Found 0 matches for", clentLoginRequestBody.email);
-                res.json({ "loginMssg": "Mail does not exist" });
-            } else {
-                console.log("In /login, Dababase error: Found", rows.length, "matches for one email!");
-                res.sendStatus(500);
-            }
-            res.end();
+            res.json(
+                {
+                    "error": "Wrong password"
+                });
         }
-        res.end();
     });
 });
 
 
 auth.get("/logout", (req, res) => {
-    console.log("Logging out and destroying cookie!");
     req.session.destroy();
     res.redirect("/lobby/login");
 });

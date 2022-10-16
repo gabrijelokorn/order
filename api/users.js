@@ -4,30 +4,26 @@ const users = express.Router();
 
 users.get("/listUsers", (req, res) => {
 
-    const listUsersQuery = "SELECT * from Users";
-    pool.query(listUsersQuery, (err, rows) => {
+    const list_users_request_sql_query = "SELECT * from Users";
+    pool.query(list_users_request_sql_query, (err, rows) => {
         if (err) {
-            console.log("In /listUsers, Database error:", err);
+            console.log("Database error (in /api/users.js/listUsers):", err);
             res.sendStatus(500);
         } else {
-            // console.log("In   /listUsers,", rows);
-            console.log(req.session);
             res.json(rows);
         }
-        res.end();
     });
 });
 
 users.get("/profile", (req, res) => {
-    console.log("In /profile,");
-    const profileUserName = req.query.userName;
-    const getUserQuery = "SELECT * from Users where userName = ?"
-    pool.query(getUserQuery, profileUserName, (err, rows) => {
+    const profile_request_client_query = req.query;
+    console.log(profile_request_client_query.userName);
+    const profile_request_sql_query = "SELECT * from Users where userName = ?"
+    pool.query(profile_request_sql_query, profile_request_client_query.un, (err, rows) => {
         if (err) {
-            console.log("In /profile, Database error:", err);
+            console.log("Database error (in /api/users.js/profile):", err);
             res.sendStatus(500);
         } else {
-            // console.log("In /profile,", rows);
             res.json(rows);
         }
     });

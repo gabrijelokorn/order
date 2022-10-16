@@ -1,4 +1,3 @@
-import { AppComponent } from './../../app.component';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { UserService } from '../../user.service';
 @Component({
@@ -15,10 +14,10 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  loginFun(userdata = { email: String, password: String }) {
-    this.userService.loginRequest(userdata).subscribe(user => {
+  login_request_function(userdata = { email: String, password: String }) {
+    this.userService.login_request_service(userdata).subscribe(user => {
       this.newUser = user;
-      this.userService.set_userName(this.newUser.userName);
+      this.userService.user.userName = this.newUser.u_un;
       
     });
   }

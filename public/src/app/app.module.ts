@@ -16,6 +16,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AdministrationComponent } from './administration/administration.component';
 import { ProfileComponent } from './profile/profile.component';
+import { CanvasComponent } from './canvas/canvas.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ProfileComponent } from './profile/profile.component';
     LoginComponent,
     RegisterComponent,
     AdministrationComponent,
-    ProfileComponent
+    ProfileComponent,
+    CanvasComponent
   ],
   imports: [
     BrowserModule,

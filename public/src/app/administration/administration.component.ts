@@ -12,20 +12,9 @@ export class AdministrationComponent implements OnInit {
   rows: any;
 
   ngOnInit(): void {
-    this.userService.listUsersRequest().subscribe((data) => {
-      console.log(data);
+    this.userService.listUsers_request_service().subscribe((data) => {
       this.rows = data
     });
   }
 
-}
-@Pipe({name: 'keys'})
-export class KeysPipe implements PipeTransform {
-  transform(value: { [x: string]: any; }, args:string[]) : any {
-    let keys = [];
-    for (let key in value) {
-      keys.push({key: key, value: value[key]});
-    }
-    return keys;
-  }
 }

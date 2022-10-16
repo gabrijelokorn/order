@@ -19,7 +19,7 @@ const app = express();
 // ------------ SESSION AND COOKIES ------------ //
 app.use(session({
     secret: "rolling-communication",
-    // rolling: true,
+    rolling: true,
     cookie: {
         maxAge: 1000 * 60 * 60,
     },
@@ -33,21 +33,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // ------------ MIDDLEWARE ------------ //
-app.get("/*", (req, res, next) => {
-    console.log(req.session.id, ":", req.session);
-    next();
+app.get("/canvas", (req, res) => {
+    console.log("gotit");
 });
 app.use(express.static('public/dist/order'));
 app.use("/api", api);
-app.get("/test", (req, res) => {
-    // console.log(req.session);
-    res.end();
-});
 app.use((req, res) => {
     res.sendFile(path.join(`${__dirname}/public/dist/order/index.html`))
 });
 // ------------ ---------- ------------ //
 
 
-app.listen(PORT, console.log("App running on http://localhost:5000"));
+app.listen(PORT, console.log("App running on http://192.168.13.128:5000"));
 

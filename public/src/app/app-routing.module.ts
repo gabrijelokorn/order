@@ -1,3 +1,4 @@
+import { CanvasComponent } from './canvas/canvas.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AdministrationComponent } from './administration/administration.component';
 import { RegisterComponent } from './lobby/register/register.component';
@@ -15,7 +16,8 @@ const routes: Routes = [
       ]
   },
   { path: 'administration', component: AdministrationComponent },
-  { path: 'profile', component: ProfileComponent }
+  { path: 'profile', component: ProfileComponent },
+  { path: 'canvas', component: CanvasComponent }
 ];
 
 @NgModule({

@@ -7,13 +7,11 @@ import { UserService } from './user.service';
 })
 export class AppComponent {
   title = 'order';
-  // uname: String | undefined;
   
   constructor (public userService: UserService) {
   }
   
   ngOnInit(): void {
-    // this.uname = this.userService.user.userName;
     
   }
   

@@ -1,0 +1,24 @@
+<p>editor works!</p>
+<form #addPersonForm="ngForm" (submit)="add_person_request_function(addPersonForm.value)">
+    <mat-form-field>
+        <input matInput name="fn" type="text" placeholder="Janez" ngModel>
+    </mat-form-field>
+    &nbsp;
+    <mat-form-field>
+        <input matInput name="ln" type="text" placeholder="Novak" ngModel>
+    </mat-form-field>
+    &nbsp;
+    <mat-form-field>
+        <input matInput type="date" name="bdd" ngModel>
+    </mat-form-field>
+    &nbsp;
+    <mat-form-field appearance="fill">
+        <mat-label>Sex</mat-label>
+        <select name="sex" matNativeControl ngModel>
+            <option value="man">male</option>
+            <option value="woman">female</option>
+        </select>
+    </mat-form-field>
+    <button type="submit" mat-flat-button color="primary">Add</button>
+</form>
+<button (click)="remove_person_request_function()" type="submit" mat-flat-button color="primary">Delete</button>

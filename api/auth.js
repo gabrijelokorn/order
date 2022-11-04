@@ -8,7 +8,6 @@ auth.get("/register", (req, res) => {
 });
 
 auth.post("/login", (req, res) => {
-    console.log("why here?");
     const login_request_client_body = req.body;
     const login_request_sql_query = 'SELECT uid as u_uid, userName as u_un, password as u_pwd from Users where email = ?';
     pool.query(login_request_sql_query, login_request_client_body.email, (err, rows) => {
@@ -41,7 +40,6 @@ auth.post("/login", (req, res) => {
 
 
 auth.get("/logout", (req, res) => {
-    console.log("been here");
     req.session.destroy();
     res.redirect("/lobby/login");
 });

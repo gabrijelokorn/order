@@ -1,6 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { UserService } from '../../user.service';
-import { DatePipe, formatDate } from '@angular/common';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -15,7 +14,7 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  login_request_function(userdata = { email: String, password: String }) {
+  login_request_function(userdata = { email: String, pwd: String }) {
     this.userService.login_request_service(userdata).subscribe(user => {
       this.logged_user = user;
       this.userService.user.userName = this.logged_user.u_un;

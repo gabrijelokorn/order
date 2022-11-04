@@ -9,15 +9,18 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 import { AppComponent } from './app.component';
 import { LobbyComponent } from './lobby/lobby.component';
 import { LoginComponent } from './lobby/login/login.component';
 import { RegisterComponent } from './lobby/register/register.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AdministrationComponent } from './administration/administration.component';
 import { ProfileComponent } from './profile/profile.component';
 import { CanvasComponent } from './canvas/canvas.component';
+import { EditorComponent } from './editor/editor.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,8 @@ import { CanvasComponent } from './canvas/canvas.component';
     RegisterComponent,
     AdministrationComponent,
     ProfileComponent,
-    CanvasComponent
+    CanvasComponent,
+    EditorComponent,
   ],
   imports: [
     BrowserModule,
@@ -38,7 +42,10 @@ import { CanvasComponent } from './canvas/canvas.component';
     MatIconModule,
     MatInputModule,
     MatButtonModule,
-    HttpClientModule
+    HttpClientModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    ReactiveFormsModule
   ],
   providers: [
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'fill' } },

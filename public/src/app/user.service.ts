@@ -13,7 +13,7 @@ export class UserService {
   constructor(private httpClient: HttpClient) { 
   }
   
-  login_request_service(userdata = { email: String, password: String }) {
+  login_request_service(userdata = { email: String, pwd: String }) {
     return this.httpClient.post('http://192.168.13.128:5000/api/auth/login', userdata, { headers: this.httpHeaders });
   }
 

@@ -17,11 +17,15 @@ export class UserService {
     return this.httpClient.post('http://192.168.13.128:5000/api/auth/login', userdata, { headers: this.httpHeaders });
   }
 
+  logout_request_service() {
+    return this.httpClient.get('http://192.168.13.128:5000/api/auth/logout', { headers: this.httpHeaders });
+  }
+
   listUsers_request_service() {
     return this.httpClient.get(`http://192.168.13.128:5000/api/users/listUsers`, { headers: this.httpHeaders })
   }
 
   getUser_request_service(userName: String) {
-    return this.httpClient.get(`http://192.168.13.128:5000/api/users/profile?un=${userName}`, { headers: this.httpHeaders })
+    return this.httpClient.get(`http://192.168.13.128:5000/api/users/getUserInfo?un=${userName}`, { headers: this.httpHeaders })
   }
 }

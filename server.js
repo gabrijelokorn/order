@@ -33,9 +33,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // ------------ MIDDLEWARE ------------ //
-app.get("/canvas", (req, res) => {
-    console.log("gotit");
-});
 app.use(express.static('public/dist/order'));
 app.use("/api", api);
 app.use((req, res) => {

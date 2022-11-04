@@ -15,13 +15,12 @@ users.get("/listUsers", (req, res) => {
     });
 });
 
-users.get("/profile", (req, res) => {
+users.get("/getUserInfo", (req, res) => {
     const profile_request_client_query = req.query;
-    console.log(profile_request_client_query.userName);
     const profile_request_sql_query = "SELECT * from Users where userName = ?"
     pool.query(profile_request_sql_query, profile_request_client_query.un, (err, rows) => {
         if (err) {
-            console.log("Database error (in /api/users.js/profile):", err);
+            console.log("Database error (in /api/users.js/getUserInfo):", err);
             res.sendStatus(500);
         } else {
             res.json(rows);

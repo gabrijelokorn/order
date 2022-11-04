@@ -19,8 +19,8 @@ export class LoginComponent implements OnInit {
     this.userService.login_request_service(userdata).subscribe(user => {
       this.logged_user = user;
       this.userService.user.userName = this.logged_user.u_un;
-      console.log(user);
-
     });
+    sessionStorage.setItem("visits", "1");
   }
+
 }
